@@ -14,15 +14,19 @@ const y = canvas.height / 2
 const player = new Player(x, y, 10, 'white')
 const players = {}
 
+// creates event listener for 'updatePlayers' and passes in backendPlayers as a parameter
 socket.on('updatePlayers', (backendPlayers) => {
+
+  // 
   for (const id in backendPlayers) {
     const backendPlayer = backendPlayers [id]
-
+    //if there is no player create a new one and define x, y, pixel size, and color variables
     if (!players [id]) {
       players [id] = new Player (backendPlayer.x, backendPlayer.y, 10, 'white')
     }
   }
   
+  // 
   for (const id in players) {
     if (!backendPlayers[id]) {
       delete players[id]
